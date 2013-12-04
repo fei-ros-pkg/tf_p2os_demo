@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+  <node name="kinect_aux" pkg="kinect_aux" type="kinect_aux_node" respawn="true" output="screen"/>
+
+  <!-- static_transform_publisher x y z yaw pitch roll frame_id child_frame_id period_in_ms -->
+  <!-- static_transform_publisher x y z qx qy qz qw frame_id child_frame_id  period_in_ms -->
+  <!-- <node name="camera_link_broadcaster" pkg="tf" type="static_transform_publisher"
+    args="0.15 0 0.90 0 0 0 base_link camera_link 100"/> -->
+
+  <node name="camera_link_broadcaster" pkg="tf_p2os_demo" type="camera_link_broadcaster" respawn="true" output="screen"/>
+</launch>

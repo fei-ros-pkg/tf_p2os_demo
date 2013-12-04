@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find tf_p2os_demo)/launch/peoplebot.launch"/>
+  <include file="$(find tf_p2os_demo)/launch/tf_demo.launch"/>
+  <include file="$(find tf_p2os_demo)/launch/teleop_joy.launch"/>
+
+</launch>
