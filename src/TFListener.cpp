@@ -16,21 +16,19 @@
 
 #include <boost/bind.hpp>
 
-//void robotPoseCallback(ros::NodeHandle &node_handle,
-//		const geometry_msgs::PoseWithCovarianceStampedConstPtr& pose) {
-
-void RobotPoseCallback(ros::Publisher &pub, SpiralBehaviour &sb, tf::TransformListener &listener,
+void RobotPoseCallback(ros::Publisher &pub, tf::TransformListener &listener,
 		tf::StampedTransform &transform,
-		const geometry_msgs::PoseWithCovarianceStampedConstPtr& pose) {
+		const geometry_msgs::PoseWithCovarianceConstPtr& pose) {
 
 	try {
 		listener.lookupTransform("/odom", "/base_link",
     		ros::Time(0), transform);
 
-		geometry_msgs::Twist spiralCmd;
-		spiralCmd = sb.CalculateVels(transform);
+		geometry_msgs::Twist velCmd;
+		velCmd.linear.x = 0.0;
+		velCmd.angular.z = 0.0;
 
-		pub.publish(spiralCmd);
+		pub.publish(velCmd);
 	}
 	catch (tf::TransformException &ex) {
 		ROS_ERROR("%s",ex.what());
@@ -44,7 +42,7 @@ int main(int argc, char* argv[]) {
 
 	ros::NodeHandle myNode;
 
-	ros::Publisher spiralPub = myNode.advertise<geometry_msgs::Twist>(
+	ros::Publisher velPub = myNode.advertise<geometry_msgs::Twist>(
 			"/cmd_vel", 1);
 
 	tf::TransformListener listener;
@@ -54,10 +52,9 @@ int main(int argc, char* argv[]) {
 	subOpts.topic = "/odom";
 	subOpts.queue_size = 1;
 
-
-	ros::Subscriber spiral_sub = myNode.subscribe<geometry_msgs::PoseWithCovarianceStamped>(
-			"/robot_pose_ekf/odom_combined", 1,
-			boost::bind(&RobotPoseCallback, boost::ref(spiralPub), boost::ref(sb),
+	ros::Subscriber poseSub = myNode.subscribe<geometry_msgs::PoseWithCovariance>(
+			"/odom", 1,
+			boost::bind(&RobotPoseCallback, boost::ref(velPub),
 			boost::ref(listener), boost::ref(transform), _1));
 
 	ros::Rate loop_rate(10);
