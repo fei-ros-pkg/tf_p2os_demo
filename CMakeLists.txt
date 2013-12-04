@@ -86,7 +86,7 @@ find_package(Boost REQUIRED COMPONENTS signals system thread)
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  INCLUDE_DIRS include
+#  INCLUDE_DIRS include
 #  LIBRARIES tf_p2os_demo
   CATKIN_DEPENDS geometry_msgs kinect_aux message_filters nav_msgs p2os_driver roscpp sensor_msgs std_msgs tf
 #  DEPENDS system_lib
