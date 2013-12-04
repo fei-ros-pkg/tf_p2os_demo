@@ -112,6 +112,7 @@ include_directories(
 ## Declare a cpp executable
 # add_executable(tf_p2os_demo_node src/tf_p2os_demo_node.cpp)
 add_executable(camera_link_broadcaster src/KinectTiltTFBroadcaster.cpp)
+add_executable(tf_listener_demo src/TFListener.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
@@ -122,6 +123,7 @@ add_executable(camera_link_broadcaster src/KinectTiltTFBroadcaster.cpp)
 #   ${catkin_LIBRARIES}
 # )
 target_link_libraries(camera_link_broadcaster ${catkin_LIBRARIES})
+target_link_libraries(tf_listener_demo ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -139,10 +141,11 @@ target_link_libraries(camera_link_broadcaster ${catkin_LIBRARIES})
 
 ## Mark executables and/or libraries for installation
 # install(TARGETS tf_p2os_demo tf_p2os_demo_node
-#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+install(TARGETS camera_link_broadcaster tf_listener_demo
+   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
 
 ## Mark cpp header files for installation
 # install(DIRECTORY include/${PROJECT_NAME}/
