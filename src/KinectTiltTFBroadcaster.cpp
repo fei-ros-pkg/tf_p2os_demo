@@ -18,8 +18,8 @@
 void BroadcastCameraLinkTF(tf::TransformBroadcaster &br,
 		const std_msgs::Float64ConstPtr& tilt) {
 	tf::Transform transform;
-	transform.setOrigin( tf::Vector3(0.09, 0.12, 0.17) );
-	transform.setRotation( tf::createQuaternionFromRPY(0.0, tilt->data*M_PI/180.0, M_PI/2.0) );
+	transform.setOrigin( tf::Vector3(0.15, 0.0, 0.9) );
+	transform.setRotation( tf::createQuaternionFromRPY(0.0, tilt->data*M_PI/180.0, 0.0) );
 	br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "base_link", "camera_link"));
 }
 

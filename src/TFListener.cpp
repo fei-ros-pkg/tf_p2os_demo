@@ -44,7 +44,7 @@ void RobotPoseCallback(ros::Publisher &pub, tf::TransformListener &listener,
 		ROS_INFO("Robot.yaw: %.2f", tf::getYaw(tfPose.getRotation()));
 		ROS_INFO("Robot.yaw: %.2f", tf::getYaw(robotPose.pose.orientation));
 
-		listener.transformPose("/camera_depth_optical_frame",
+		listener.transformPose("/camera_link",
     		robotPose, kinectPose);
 
 		tf::poseMsgToTF(kinectPose.pose, tfPose);
